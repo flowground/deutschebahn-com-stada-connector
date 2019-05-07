@@ -1,0 +1,15 @@
+{
+    "name": "deutschebahn-com-stada-connector",
+    "version": "0.0.1",
+    "description": "An API providing master data for german railway stations by DB Station&Service AG.",
+    "main": "component.json",
+    "dependencies": {
+        "elasticio-node": "0.0.9",
+        "elasticio-sailor-nodejs": "^2.2.1",
+        "swagger-client": "^3.8.22"
+    },
+    "author": {
+        "name": "Deutsche Telekom AG"
+    },
+    "license": "Apache-2.0"
+}

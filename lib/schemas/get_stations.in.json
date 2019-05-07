@@ -1,0 +1,45 @@
+{
+    "type": "object",
+    "properties": {
+        "offset": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "limit": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "searchstring": {
+            "required": false,
+            "type": "string",
+            "format": "string"
+        },
+        "category": {
+            "required": false,
+            "type": "string",
+            "format": "string"
+        },
+        "federalstate": {
+            "required": false,
+            "type": "string",
+            "format": "string"
+        },
+        "eva": {
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+        },
+        "ril": {
+            "required": false,
+            "type": "string",
+            "format": "string"
+        },
+        "logicaloperator": {
+            "required": false,
+            "type": "string",
+            "format": "string"
+        }
+    }
+}

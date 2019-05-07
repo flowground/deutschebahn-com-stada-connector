@@ -1,0 +1,103 @@
+{
+    "title": "Stationsdatenbereitstellung",
+    "description": "An API providing master data for german railway stations by DB Station&Service AG.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/deutschebahn.com/stada/2.2.01/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://api.deutschebahn.com/stada/v2",
+                    "http://api.deutschebahn.com/stada/v2",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_stations": {
+            "main": "./lib/actions/get_stations.js",
+            "title": "This operation provides the master data for german railway stations.",
+            "description": "Get a QueryResult object containing station objects from the database applying to the parameters described below. \n\nQueryResult is a container providing the following information about the query result.\n  1. the total number of hits\n  2. the maximum number of hits to be returned in that QueryResult object\n  3. the offset of the first hit returned in that QueryResult object with respect to all hits returned by the query\n  4. the result objects\n  \nThe parameters described below work as filters to reduce the number of hits returned. Some of these parameters must be used only once, others are allowed to be used multiple times. Valid parameters that are allowed to be used only once are _offset_, _limit_ and _logicaloperator_. \n\nAll other parameters described below may be used multiple times.\n\nIf a parameter is given more than once, the result will contain all hits that match all given parameter values.\n\nE.g. _federalstate=berlin&federalstate=saarland_ returns all stations in Berlin and Saarland.\n\nIf more than one filter criterion is used at the same time, the different filter criteria are interpreted as if they are combined by a logical AND operator, unless the parameter _logicaloperator_ is set to _or_.\n\nE.g. _category=1-2&federalstate=hamburg_ returns all stations in Hamburg having category 1 or 2.\n\n_category=1-2&federalstate=hamburg&federalsate=hessen_ returns all stations in Hamburg and Hessen having category 1 or 2, while\n\n_searchstring=berlin*&federalstate=hamburg&federalsate=hessen&logicaloperator=or_ will return all stations with a name starting with 'berlin' as well as all stations in Hamburg and Hessen.\n\nIf no 'limit' parameter is given, the number of hits (stations) is set to its maximum value of 10000.\n\nTo specify parameter values containing German umlauts, the following encoding has to be used\n  * a  => %C3%A4\n  * o  => %C3%B6\n  * u  => %C3%BC\n  * A  => %C3%84\n  * O  => %C3%96\n  * U  => %C3%9C\n  * ss  => %C3%9F\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_stations.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_stations__id_": {
+            "main": "./lib/actions/get_stations__id_.js",
+            "title": "This operation provides the master data for a german railway station selected by its station-id.",
+            "description": "Get a QueryResult object containing one station object specified by its id.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_stations__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_szentralen": {
+            "main": "./lib/actions/get_szentralen.js",
+            "title": "This operation provides the master data for 3-S-Zentralen.",
+            "description": "Get a QueryResult object containing SZentralen objects from the database applying to the parameters described below. \nQueryResult is a container providing the following information about the query result.\n  1. the total number of hits\n  2. the maximum number of hits to be returned in that QueryResult object\n  3. the offset of the first hit returned in that QueryResult object with respect to all hits returned by the query\n  4. the result objects\n",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_szentralen.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_szentralen__id_": {
+            "main": "./lib/actions/get_szentralen__id_.js",
+            "title": "This operation provides the master data for 3-S-Zentralen select by its id.",
+            "description": "Get a QueryResult object containing one SZentralen object specified by its id. ",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_szentralen__id_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
